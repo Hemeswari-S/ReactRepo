@@ -10,3 +10,14 @@
 h4{
     color: darkblue;
 }
+.GridDiv{
+  padding: 8px;
+}
+.btnDiv{
+  display: flex;
+  justify-content:center;
+
+}
+.Dialog{
+  width:500px;
+}

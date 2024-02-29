@@ -1,46 +1,61 @@
-import React from "react";
-import { Button, Collapse, Modal } from "antd";
+import React, { useEffect } from "react";
+import { Button, Collapse } from "antd";
 import "./Home.css";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Grid } from "@material-ui/core";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+} from "@material-ui/core";
+import axios from "axios";
 // import UpiSelect from "../UPFolder/Upi";
 
 function Home() {
-  const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState(
-    "Are you sure! Do you Want to Go With NetBanking"
-  );
+  const win = window.sessionStorage;
 
   const navigate = useNavigate();
 
-  const showModal = () => {
-    
+  const [ID, SETId] = useState(0);
+  const [InvoiceId, SetInvoiceId] = useState(0);
+  const [Amount, SetAmount] = useState(0);
+  const [total, settotal] = useState(0);
+  const [PONumber, SetPONumber] = useState(0);
+  const [Tax, SetTax] = useState(0);
+  const [TaXID, SetTaXID] = useState(0);
+  const [VendorId, SetVendorId] = useState(0);
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    SETId(win.getItem("ID"));
+    console.log("Home Getitem ID " + Number(win.getItem("IdofArray")));
+  }, []);
+  const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleOk = () => {
-    setModalText("Your Redirecting to The NetBanking page");
-    navigate("/NetBanking")
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
 
-  const handleCancel = () => {
-    console.log("Clicked cancel button");
+  const handleClose = () => {
     setOpen(false);
   };
+  function GetByID(id) {
+    axios.get("http://localhost:3030/InvoiceDetail?id=" + id).then((result) => {
+      SetInvoiceId(result.data[0].InvoiceId);
+      SetPONumber(result.data[0].PONumber);
+      SetTaXID(result.data[0].TaXID);
+      SetTax(result.data[0].Tax);
+      SetAmount(result.data[0].Amount);
+      SetVendorId(result.data[0].VendorId);
+       settotal(Number(result.data[0].Amount) + Number(result.data[0].Tax));
+    });
+  }
+
+
   const items = [
     {
       key: "1",
       label: "Net Banking",
       children: (
-        // <Button type="primary" onClick={showModal}>
-        //   Proceed
-        // </Button>
         <Button
           type="primary"
           onClick={() => {
@@ -94,69 +109,144 @@ function Home() {
       ),
     },
   ];
+ 
+    if (ID > 0) {
+      GetByID(ID);
+    } else {
+      return false;
+    }
+
   return (
     <>
-      
       <div className="HomeDiv">
-      <h4>Select Payment Method</h4>
+        <h4>Your Payment Details</h4>
 
         <div className="container">
-        <div className='container'>
-
-        <br/>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-  <Grid item xs={12}>
-    <div className="GridDiv"><strong>Invoice No : <i>89674523</i></strong></div>
-  </Grid>
-  <Grid item xs={12}>
-  <div className="GridDiv"><strong>Invoice Amount : <i>45,000</i></strong></div>
-   
-  </Grid>
-  <Grid item xs={12}>
-  <div className="GridDiv"><strong>User Name : <i>xxxxxxxx</i></strong></div>
-   
-  </Grid>
-  <Grid item xs={12}>
-  <div className="GridDiv"><strong>Invoice Type : <i>xxxxxxxx</i></strong></div>
-   
-  </Grid>
-</Grid>
-{/* <div className='container'></div> */}
-{/* <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-<Grid item xs={3}>
-    <div className="GridDiv"><strong>Invoice No : <i>89674523</i></strong></div>
-    <div className="GridDiv"><strong>Invoice No : <i>89674523</i></strong></div>
-    <div className="GridDiv"><strong>Invoice No : <i>89674523</i></strong></div>
-    <div className="GridDiv"><strong>Invoice No : <i>89674523</i></strong></div>
-  </Grid>
-</Grid> */}
-
-    </div>
-    <br></br>
-      <br></br>
-          <Collapse accordion items={items} />
+          <div className="container">
+            <Grid
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            >
+              {/* Row--Start */}
+              <Grid item xs={6}>
+                <div className="GridDiv">
+                  <strong>Invoice Id :</strong>
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="GridDiv">{InvoiceId}</div>
+              </Grid>
+              {/* Row--End */}
+              {/* Row--Start */}
+              <Grid item xs={6}>
+                <div className="GridDiv">
+                  <strong>Vendor Id :</strong>
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="GridDiv">{VendorId}</div>
+              </Grid>
+              {/* Row--End */}
+              {/* Row--Start */}
+              <Grid item xs={6}>
+                <div className="GridDiv">
+                  <strong>PO NUmber :</strong>
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="GridDiv">{PONumber}</div>
+              </Grid>
+              {/* Row--End */}
+              {/* Row--Start */}
+              <Grid item xs={6}>
+                <div className="GridDiv">
+                  <strong>Invoice Amount :</strong>
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="GridDiv">{Amount}</div>
+              </Grid>
+              {/* Row--End */}
+              {/* Row--Start */}
+              <Grid item xs={6}>
+                <div className="GridDiv" style={{ textAlign: "right" }}>
+                  <strong>Sub Total :</strong>
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="GridDiv">{Amount}</div>
+              </Grid>
+              {/* Row--End */}
+              {/* Row--Start */}
+              <Grid item xs={6}>
+                <div className="GridDiv">
+                  <strong>Tax Id :</strong>
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="GridDiv">{TaXID}</div>
+              </Grid>
+              {/* Row--End */}
+              {/* Row--Start */}
+              <Grid item xs={6}>
+                <div className="GridDiv">
+                  <strong>Tax Amount :</strong>
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="GridDiv">{Tax}</div>
+              </Grid>
+              {/* Row--End */}
+              {/* Row--Start */}
+              <Grid item xs={6}>
+                <div
+                  className="GridDiv"
+                  style={{
+                    textAlign: "right",
+                    borderTop: "1px solid rgb(29, 29, 88)",
+                  }}
+                >
+                  <strong>Grand Total :</strong>
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className="GridDiv">{total}</div>
+              </Grid>
+              {/* Row--End */}
+            </Grid>
+          </div>
+          <br></br>
+          <div className="btnDiv">
+            <Button type="primary" onClick={handleClickOpen}>
+              Pay Now
+            </Button>
+          </div>
         </div>
       </div>
-
-      <Button type="primary"
+      <Button
+        type="primary"
         onClick={() => {
           navigate("/Crud");
         }}
       >
         Go to CRUD
-      </Button>      {/* <Modal
-        title="Confirm !"
+      </Button>
+      <Dialog
         open={open}
-        onOk={handleOk}
-        confirmLoading={confirmLoading}
-        onCancel={handleCancel}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
       >
-        <p>{modalText}</p>
-      </Modal> */}
-     
+        <DialogTitle>{"Select Your Payment Method"}</DialogTitle>
+        <DialogContent>
+          <Collapse className="Dialog" accordion items={items} />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
 export default Home;
-
-

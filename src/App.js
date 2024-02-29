@@ -17,23 +17,11 @@ export function App() {
   
   const win = window.sessionStorage;
   const [IsLoogedIN, SetIsLoogedIN] = useState(false);
-  // SetIsLoogedIN(
-  //   win.getItem("username") === "Hemeswari" &&
-  //     win.getItem("password") === "Jamal"
-  // );
+
   useEffect(() => {
     SetIsLoogedIN(
-      win.getItem("username") === "Hemeswari"&&win.getItem("password") === "Jamal")
-    
-    // SetIsLoogedIN(
-    //   win.getItem("username") === "Hemeswari" &&
-    //     win.getItem("password") === "Jamal"
-    // );
+      win.getItem("username") === "Hemeswari"&&win.getItem("password") === "Jamal");
   });
-  console.log(win.getItem("username") === "Hemeswari"&&win.getItem("password") === "Jamal");
-  console.log(win.getItem("username"));
-  console.log("win.getItem()");
-  console.log(IsLoogedIN);
 
   function NAv() {
    

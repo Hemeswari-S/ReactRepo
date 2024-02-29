@@ -1,14 +1,15 @@
 // import { Button, Input } from "@material-ui/core";
 import { Button, Input } from "antd";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../AddInvoice/invoice.css"
+import "../AddInvoice/invoice.css";
 
-const ResApiURL = "http://localhost:3031/InvoiceDetail";
+const ResApiURL = "http://localhost:3030/InvoiceDetail";
 
 export default function AddInvoice() {
-  const [Id, SetId] = useState(0);
+  const win = window.sessionStorage;
+  const [Id, SetId] = useState(1);
   const [Amount, SetAmount] = useState();
   const [InvoiceId, SetInvoiceId] = useState("");
   const [PONumber, SetPONumber] = useState("");
@@ -17,10 +18,22 @@ export default function AddInvoice() {
   const [VendorId, SetVendorId] = useState("");
   const [date, SetDate] = useState("");
   const navigate = useNavigate();
+  useEffect(() => {
+    SetId(win.getItem("IdofArray"));
+    console.log("AddInvoice Getitem ID" + Number(win.getItem("IdofArray")));
+  }, []);
+  useEffect(() => {
+    win.setItem("IdofArray", Id);
+    console.log("AddInvoice Set ID" + Number(win.getItem("IdofArray")));
+  }, [Id]);
+  const increaseCount = () => {
+    SetId(Number(Id) + 1);
+    console.log("AddInvoice Increase ID" + Number(Id));
 
+
+  };
   return (
     <div className="AddInvoice">
-
       <label>InvoiceId :</label>
       <Input
         type="number"
@@ -28,27 +41,50 @@ export default function AddInvoice() {
         onChange={(e) => SetInvoiceId(e.target.value)}
       />
       <label>PONumber :</label>
-      <Input value={PONumber} onChange={(e) => SetPONumber(e.target.value)} />
+      <Input
+        type="number"
+        value={PONumber}
+        onChange={(e) => SetPONumber(e.target.value)}
+      />
       <label>Amount :</label>
-      <Input value={Amount} onChange={(e) => SetAmount(e.target.value)} />
+      <Input
+        type="number"
+        value={Amount}
+        onChange={(e) => SetAmount(e.target.value)}
+      />
       <label>Tax :</label>
-      <Input value={Tax} onChange={(e) => SetTax(e.target.value)} />
+      <Input
+        type="number"
+        value={Tax}
+        onChange={(e) => SetTax(e.target.value)}
+      />
       <label>TaXID :</label>
-      <Input value={TaXID} onChange={(e) => SetTaXID(e.target.value)} />
+      <Input
+        type="number"
+        value={TaXID}
+        onChange={(e) => SetTaXID(e.target.value)}
+      />
       <label>VendorId :</label>
-      <Input value={VendorId} onChange={(e) => SetVendorId(e.target.value)} />
- <br/>    
- <br/>    
+      <Input
+        type="number"
+        value={VendorId}
+        onChange={(e) => SetVendorId(e.target.value)}
+      />
+      <br />
+      <br />
 
       <Button
         type="primary"
         htmlType="submit"
         onClick={() => {
-          SetId(Id + 1);
-          SetDate(new Date())
+          increaseCount();
+          console.log("AddInvoice Increase ID" + Number(Id));
+          console.log(Number(Id));
+
+          SetDate(new Date());
           axios
             .post(ResApiURL, {
-              id: Id,
+              id: Number(Id),
               InvoiceId: InvoiceId,
               PONumber: PONumber,
               Amount: Amount,
@@ -59,17 +95,11 @@ export default function AddInvoice() {
             })
             .then(() => {
               alert("Added");
+              navigate("/Home");
             });
         }}
       >
         Add
-      </Button>
-      <Button
-        onClick={() => {
-          navigate("/Home");
-        }}
-      >
-        Home
       </Button>
     </div>
   );
