@@ -19,20 +19,16 @@ export default function AddInvoice() {
   const [date, SetDate] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
-    SetId(win.getItem("IdofArray"));
+    if(win.getItem("Id")!==null){
+      SetId(Number(win.getItem("Id")));
+    }
     console.log("AddInvoice Getitem ID" + Number(win.getItem("IdofArray")));
   }, []);
-  useEffect(() => {
-    win.setItem("IdofArray", Id);
-    console.log("AddInvoice Set ID" + Number(win.getItem("IdofArray")));
-  }, [Id]);
-  const increaseCount = () => {
-    SetId(Number(Id) + 1);
-    console.log("AddInvoice Increase ID" + Number(Id));
-
-
-  };
-  return (
+  // useEffect(() => {
+  //   win.setItem("IdofArray", Id);
+  //   console.log("AddInvoice Set ID" + Number(win.getItem("IdofArray")));
+  // }, [Id]);
+    return (
     <div className="AddInvoice">
       <label>InvoiceId :</label>
       <Input
@@ -77,25 +73,22 @@ export default function AddInvoice() {
         type="primary"
         htmlType="submit"
         onClick={() => {
-          increaseCount();
-          console.log("AddInvoice Increase ID" + Number(Id));
-          console.log(Number(Id));
-
-          SetDate(new Date());
           axios
             .post(ResApiURL, {
-              id: Number(Id),
+              id: Id,
               InvoiceId: InvoiceId,
               PONumber: PONumber,
               Amount: Amount,
               Tax: Tax,
               TaXID: TaXID,
-              date: date,
+              date: ,
               VendorId: VendorId,
             })
             .then(() => {
-              alert("Added");
-              navigate("/Home");
+              //alert("Added");
+            //  SetId((prevVlue) => prevVlue + 1);
+              sessionStorage.setItem("Id", Id + 1);
+              navigate("/Home",{state:Id});
             });
         }}
       >
