@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Button, Collapse } from "antd";
 import "./Home.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
   Dialog,
@@ -11,25 +11,44 @@ import {
   Grid,
 } from "@material-ui/core";
 import axios from "axios";
-// import UpiSelect from "../UPFolder/Upi";
 
 function Home() {
-  const win = window.sessionStorage;
+   const win = window.sessionStorage;
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [ID, SETId] = useState(0);
-  const [InvoiceId, SetInvoiceId] = useState(0);
-  const [Amount, SetAmount] = useState(0);
   const [total, settotal] = useState(0);
-  const [PONumber, SetPONumber] = useState(0);
-  const [Tax, SetTax] = useState(0);
-  const [TaXID, SetTaXID] = useState(0);
-  const [VendorId, SetVendorId] = useState(0);
   const [open, setOpen] = useState(false);
+  const [Data, setData] = useState({
+    InvoiceId:0,
+    PONumber:0,
+    TaXID:0,
+    Tax:0,
+    Amount:0,
+    VendorId:0,
+  
+
+  });
+
+  function GetByID() {
+    axios.get("http://localhost:3030/InvoiceDetail?id=" + location.state).then((result) => {
+      setData({
+        InvoiceId:result.data[0].InvoiceId,
+        PONumber:result.data[0].PONumber,
+        TaXID:result.data[0].TaXID,
+        Tax:result.data[0].Tax,
+        Amount:result.data[0].Amount,
+        VendorId:result.data[0].VendorId
+      })
+
+       settotal(Number(result.data[0].Amount) + Number(result.data[0].Tax));
+    });
+  }
+
   useEffect(() => {
-    SETId(win.getItem("ID"));
-    console.log("Home Getitem ID " + Number(win.getItem("IdofArray")));
+    GetByID()
   }, []);
   const handleClickOpen = () => {
     setOpen(true);
@@ -38,17 +57,6 @@ function Home() {
   const handleClose = () => {
     setOpen(false);
   };
-  function GetByID(id) {
-    axios.get("http://localhost:3030/InvoiceDetail?id=" + id).then((result) => {
-      SetInvoiceId(result.data[0].InvoiceId);
-      SetPONumber(result.data[0].PONumber);
-      SetTaXID(result.data[0].TaXID);
-      SetTax(result.data[0].Tax);
-      SetAmount(result.data[0].Amount);
-      SetVendorId(result.data[0].VendorId);
-       settotal(Number(result.data[0].Amount) + Number(result.data[0].Tax));
-    });
-  }
 
 
   const items = [
@@ -110,11 +118,9 @@ function Home() {
     },
   ];
  
-    if (ID > 0) {
-      GetByID(ID);
-    } else {
-      return false;
-    }
+    // if (ID > 0) {
+    
+    // }
 
   return (
     <>
@@ -135,7 +141,7 @@ function Home() {
                 </div>
               </Grid>
               <Grid item xs={6}>
-                <div className="GridDiv">{InvoiceId}</div>
+                <div className="GridDiv">{Data.InvoiceId}</div>
               </Grid>
               {/* Row--End */}
               {/* Row--Start */}
@@ -145,7 +151,7 @@ function Home() {
                 </div>
               </Grid>
               <Grid item xs={6}>
-                <div className="GridDiv">{VendorId}</div>
+                <div className="GridDiv">{Data.VendorId}</div>
               </Grid>
               {/* Row--End */}
               {/* Row--Start */}
@@ -155,7 +161,7 @@ function Home() {
                 </div>
               </Grid>
               <Grid item xs={6}>
-                <div className="GridDiv">{PONumber}</div>
+                <div className="GridDiv">{Data.PONumber}</div>
               </Grid>
               {/* Row--End */}
               {/* Row--Start */}
@@ -165,7 +171,7 @@ function Home() {
                 </div>
               </Grid>
               <Grid item xs={6}>
-                <div className="GridDiv">{Amount}</div>
+                <div className="GridDiv">{Data.Amount}</div>
               </Grid>
               {/* Row--End */}
               {/* Row--Start */}
@@ -175,7 +181,7 @@ function Home() {
                 </div>
               </Grid>
               <Grid item xs={6}>
-                <div className="GridDiv">{Amount}</div>
+                <div className="GridDiv">{Data.Amount}</div>
               </Grid>
               {/* Row--End */}
               {/* Row--Start */}
@@ -185,7 +191,7 @@ function Home() {
                 </div>
               </Grid>
               <Grid item xs={6}>
-                <div className="GridDiv">{TaXID}</div>
+                <div className="GridDiv">{Data.TaXID}</div>
               </Grid>
               {/* Row--End */}
               {/* Row--Start */}
@@ -195,7 +201,7 @@ function Home() {
                 </div>
               </Grid>
               <Grid item xs={6}>
-                <div className="GridDiv">{Tax}</div>
+                <div className="GridDiv">{Data.Tax}</div>
               </Grid>
               {/* Row--End */}
               {/* Row--Start */}
