@@ -56,7 +56,7 @@ export function App() {
         <Routes>
           <Route index path="/" element={<Login />}></Route>
           <Route path="/AddInvoice" element={<AddInvoice />}></Route>
-          <Route path="/Home" element={<Testing />}></Route>
+          <Route path="/Home" element={<Home />}></Route>
           <Route path="/NetBanking" element={<Netbanking />}></Route>
           <Route path="/Upi" element={<UPImethod />}></Route>
           <Route path="/Card" element={<CardSelect />}></Route>

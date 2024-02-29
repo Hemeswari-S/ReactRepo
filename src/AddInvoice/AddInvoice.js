@@ -20,8 +20,6 @@ export default function AddInvoice() {
 
   return (
     <div className="AddInvoice">
-      {/* <label>ID :</label>
-      <Input value={Id} onChange={(e) => SetId(e.target.value)} /> */}
 
       <label>InvoiceId :</label>
       <Input

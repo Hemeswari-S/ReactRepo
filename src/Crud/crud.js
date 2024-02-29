@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "../Crud/crud.css"
 import { red } from "@material-ui/core/colors";
 
-
+const RestApiURL="http://localhost:3031/logindetails/";
 function Crud() {
   const [Id, SetId] = useState();
   const [NAme, SetName] = useState("");
@@ -15,12 +15,12 @@ function Crud() {
   const [BTnTxt, SetBtnTxt] = useState('');
 
   function DeleteData(id) {
-    axios.delete("http://localhost:3031/logindetails/" + id).then((res) => {
+    axios.delete(RestApiURL + id).then((res) => {
       GetData();
     });
   }
   function GetByID(id) {
-    axios.get("http://localhost:3031/logindetails/" + id).then((result) => {
+    axios.get(RestApiURL + id).then((result) => {
       console.log(result.data);
       console.log(result.data.id);
       SetEditmode(true);
@@ -30,7 +30,7 @@ function Crud() {
     });
   }
   function GetData() {
-    axios.get("http://localhost:3031/logindetails").then((res) => {
+    axios.get(RestApiURL).then((res) => {
       SetData(res.data);
       console.log(res.data);
     });
@@ -117,7 +117,7 @@ function Crud() {
           onClick={() => {
             if (IsEditmode) {
               axios
-                .put("http://localhost:3031/logindetails/" + Id, {
+                .put(RestApiURL + Id, {
                   id: Id,
                   Name: NAme,
                   Password: Pwd,
@@ -128,7 +128,7 @@ function Crud() {
                 });
             } else {
               axios
-                .post("http://localhost:3031/logindetails", {
+                .post(RestApiURL, {
                   id: Id,
                   Name: NAme,
                   Password: Pwd,

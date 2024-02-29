@@ -11,7 +11,7 @@
       "VendorId": "6"
     },
     {
-      "id": 0,
+      "id": "0",
       "InvoiceId": "1",
       "PONumber": "2",
       "Amount": "3",
@@ -21,7 +21,7 @@
       "VendorId": "6"
     },
     {
-      "id": 1,
+      "id": "1",
       "InvoiceId": "1",
       "PONumber": "2",
       "Amount": "3",
@@ -31,7 +31,7 @@
       "VendorId": "6"
     },
     {
-      "id": 2,
+      "id": "2",
       "InvoiceId": "1",
       "PONumber": "2",
       "Amount": "3",
@@ -41,13 +41,23 @@
       "VendorId": "6"
     },
     {
-      "id": 0,
+      "id": "0",
       "InvoiceId": "",
       "PONumber": "",
       "Tax": "",
       "TaXID": "",
       "date": "",
       "VendorId": ""
+    },
+    {
+      "id": 0,
+      "InvoiceId": "1",
+      "PONumber": "2",
+      "Amount": "3",
+      "Tax": "3",
+      "TaXID": "4",
+      "date": "",
+      "VendorId": "4"
     }
   ]
 }
