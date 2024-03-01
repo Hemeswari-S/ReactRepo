@@ -2,13 +2,22 @@
   "InvoiceDetail": [
     {
       "id": 1,
-      "InvoiceId": "12",
-      "PONumber": "123424",
-      "Amount": "2343423",
-      "Tax": "34343",
-      "TaXID": "3434",
-      "date": "29/02/2024",
-      "VendorId": "3434"
+      "InvoiceId": "123",
+      "PONumber": "24234",
+      "Amount": "343243",
+      "Tax": "234345",
+      "TaXID": "432423",
+      "date": "01/03/2024",
+      "VendorId": "234234"
+    },
+    {
+      "id": 2,
+      "InvoiceId": "",
+      "PONumber": "",
+      "Tax": "",
+      "TaXID": "",
+      "date": "01/03/2024",
+      "VendorId": ""
     }
   ]
 }
