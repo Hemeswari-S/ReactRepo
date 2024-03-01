@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 
 function Home() {
-   const win = window.sessionStorage;
+  const win = window.sessionStorage;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,33 +22,35 @@ function Home() {
   const [total, settotal] = useState(0);
   const [open, setOpen] = useState(false);
   const [Data, setData] = useState({
-    InvoiceId:0,
-    PONumber:0,
-    TaXID:0,
-    Tax:0,
-    Amount:0,
-    VendorId:0,
-  
-
+    InvoiceId: 0,
+    PONumber: 0,
+    TaXID: 0,
+    Tax: 0,
+    Amount: 0,
+    VendorId: 0,
   });
 
   function GetByID() {
-    axios.get("http://localhost:3030/InvoiceDetail?id=" + location.state).then((result) => {
-      setData({
-        InvoiceId:result.data[0].InvoiceId,
-        PONumber:result.data[0].PONumber,
-        TaXID:result.data[0].TaXID,
-        Tax:result.data[0].Tax,
-        Amount:result.data[0].Amount,
-        VendorId:result.data[0].VendorId
-      })
+    axios
+      .get("http://localhost:3030/InvoiceDetail?id=" + location.state)
+      .then((result) => {
+        setData({
+          InvoiceId: result.data[0].InvoiceId,
+          PONumber: result.data[0].PONumber,
+          TaXID: result.data[0].TaXID,
+          Tax: result.data[0].Tax,
+          Amount: result.data[0].Amount,
+          VendorId: result.data[0].VendorId,
+        });
 
-       settotal(Number(result.data[0].Amount) + Number(result.data[0].Tax));
-    });
+        settotal(Number(result.data[0].Amount) + Number(result.data[0].Tax));
+      });
   }
 
   useEffect(() => {
-    GetByID()
+    if (location.state !== null) {
+      GetByID();
+    }
   }, []);
   const handleClickOpen = () => {
     setOpen(true);
@@ -57,7 +59,6 @@ function Home() {
   const handleClose = () => {
     setOpen(false);
   };
-
 
   const items = [
     {
@@ -117,10 +118,10 @@ function Home() {
       ),
     },
   ];
- 
-    // if (ID > 0) {
-    
-    // }
+
+  // if (ID > 0) {
+
+  // }
 
   return (
     <>

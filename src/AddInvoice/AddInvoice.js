@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../AddInvoice/invoice.css";
+import dayjs from "dayjs";
 
 const ResApiURL = "http://localhost:3030/InvoiceDetail";
 
@@ -81,7 +82,7 @@ export default function AddInvoice() {
               Amount: Amount,
               Tax: Tax,
               TaXID: TaXID,
-              date: ,
+              date: dayjs().format("DD/MM/YYYY"),
               VendorId: VendorId,
             })
             .then(() => {

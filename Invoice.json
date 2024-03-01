@@ -3,42 +3,12 @@
     {
       "id": 1,
       "InvoiceId": "12",
-      "PONumber": "244",
-      "Amount": "324325",
-      "Tax": "34324",
-      "TaXID": "4335",
-      "date": "",
-      "VendorId": "3545"
-    },
-    {
-      "id": 2,
-      "InvoiceId": "65",
-      "PONumber": "565477",
-      "Amount": "6765765",
-      "Tax": "75676576767",
-      "TaXID": "675675",
-      "date": "",
-      "VendorId": "575675"
-    },
-    {
-      "id": 3,
-      "InvoiceId": "1",
-      "PONumber": "2323",
-      "Amount": "3243435",
-      "Tax": "67789",
-      "TaXID": "573454",
-      "date": "",
-      "VendorId": "34534"
-    },
-    {
-      "id": 4,
-      "InvoiceId": "435435",
-      "PONumber": "345435",
-      "Amount": "4354543",
-      "Tax": "435345",
-      "TaXID": "345435",
-      "date": "",
-      "VendorId": "34534"
+      "PONumber": "123424",
+      "Amount": "2343423",
+      "Tax": "34343",
+      "TaXID": "3434",
+      "date": "29/02/2024",
+      "VendorId": "3434"
     }
   ]
 }
