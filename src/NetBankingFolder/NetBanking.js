@@ -16,13 +16,13 @@ function Netbanking() {
       <br></br>
       <br></br>
       <br></br>
-      <Button
+      {/* <Button
         onClick={() => {
           navigate("/Home");
         }}
       >
         Back
-      </Button>
+      </Button> */}
     </div>
   );
 }

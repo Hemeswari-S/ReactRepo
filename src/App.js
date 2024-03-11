@@ -10,7 +10,6 @@ import Qr from "./QrF/Qr";
 import UPImethod from "./UPFolder/UPImethod";
 import Crud from "./Crud/crud";
 import AddInvoice from "./AddInvoice/AddInvoice";
-import Testing from "./Testing/Testing";
 // import { useState } from "react";
 
 export function App() {

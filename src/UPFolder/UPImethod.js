@@ -21,13 +21,13 @@ export default function UPImethod() {
       <br/>
       <br/>
       <div style={{display:"flex",justifyContent:"end"}}>
-      <Button
+      {/* <Button
           onClick={() => {
             navigate("/Home");
           }}
         >
           Back
-        </Button>
+        </Button> */}
         </div>
     </div>
     </div>

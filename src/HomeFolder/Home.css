@@ -1,11 +1,13 @@
 .HomeDiv {
-  width: 50%;
-  
-  border-radius: 15px;
-  border: rgb(79, 79, 184) 2px solid;
-  padding: 50px;
-  margin: auto;
-  margin-top: 5%;
+  width: 40%;
+    background-color: rgb(178, 178, 198);
+    border-radius: 15px;
+    border: rgb(154, 154, 243) 2px solid;
+    box-shadow: 10px 10px 10px grey;
+    padding: 50px;
+    text-align:left ;
+    margin: auto;
+    margin-top: 5%;
 }
 h4{
     color: darkblue;
@@ -19,5 +21,5 @@ h4{
 
 }
 .Dialog{
-  width:500px;
+  width:800px;
 }

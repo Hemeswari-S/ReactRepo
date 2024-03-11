@@ -1,11 +1,20 @@
 .AddInvoice{
     width: 40%;
-    background-color: rgb(174, 174, 241);
+    background-color: rgb(178, 178, 198);
     border-radius: 15px;
-    border: rgb(79, 79, 184) 2px solid;
+    border: rgb(154, 154, 243) 2px solid;
     box-shadow: 10px 10px 10px grey;
     padding: 50px;
     text-align:left ;
     margin: auto;
     margin-top: 5%;
+}
+.Btn{
+    background-color: rgb(32, 102, 79);
+    /* color: brown; */
+    font-weight: 600;
+}
+.Btn:hover{
+    background-color: chocolate;
+    color: cadetblue;
 }

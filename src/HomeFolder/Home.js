@@ -11,14 +11,18 @@ import {
   Grid,
 } from "@material-ui/core";
 import axios from "axios";
+import Netbanking from "../NetBankingFolder/NetBanking";
+import UPImethod from "../UPFolder/UPImethod";
+import CardSelect from "../CardBankingFOlder/Card";
+import Qr from "../QrF/Qr";
 
 function Home() {
-  const win = window.sessionStorage;
+  // const win = window.sessionStorage;
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [ID, SETId] = useState(0);
+  const [Method, SETMethod] = useState("");
   const [total, settotal] = useState(0);
   const [open, setOpen] = useState(false);
   const [Data, setData] = useState({
@@ -57,7 +61,7 @@ function Home() {
   };
 
   const handleClose = () => {
-    setOpen(false);
+    Method === "" ? setOpen(false) : SETMethod("");
   };
 
   const items = [
@@ -68,7 +72,8 @@ function Home() {
         <Button
           type="primary"
           onClick={() => {
-            navigate("/NetBanking");
+            // navigate("/NetBanking");
+            SETMethod("NetBanking");
           }}
         >
           Proceed
@@ -82,7 +87,8 @@ function Home() {
         <Button
           type="primary"
           onClick={() => {
-            navigate("/Upi");
+            // navigate("/Upi");
+            SETMethod("Upi");
           }}
         >
           Proceed
@@ -96,7 +102,8 @@ function Home() {
         <Button
           type="primary"
           onClick={() => {
-            navigate("/Card");
+            // navigate("/Card");
+            SETMethod("Card");
           }}
         >
           Proceed
@@ -110,7 +117,8 @@ function Home() {
         <Button
           type="primary"
           onClick={() => {
-            navigate("/Qr");
+            // navigate("/Qr");
+            SETMethod("Qr");
           }}
         >
           Proceed
@@ -229,6 +237,15 @@ function Home() {
               Pay Now
             </Button>
           </div>
+          <br />
+          <Button
+            type="primary"
+            onClick={() => {
+              navigate("/AddInvoice");
+            }}
+          >
+            Add Invoice
+          </Button>
         </div>
       </div>
       <Button
@@ -239,20 +256,27 @@ function Home() {
       >
         Go to CRUD
       </Button>
-      <Dialog
-        open={open}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
+      {/*payment portal Dialog start*/}
+      <Dialog maxWidth="md"open={open} keepMounted onClose={handleClose}>
         <DialogTitle>{"Select Your Payment Method"}</DialogTitle>
-        <DialogContent>
-          <Collapse className="Dialog" accordion items={items} />
+        <DialogContent className="Dialog">
+          {Method === "NetBanking" ? (
+            <Netbanking />
+          ) : Method === "Upi" ? (
+            <UPImethod />
+          ) : Method === "Card" ? (
+            <CardSelect />
+          ) : Method === "Qr" ? (
+            <Qr />
+          ) : (
+            <Collapse accordion items={items} />
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
+      {/*payment portal Dialog End*/}
     </>
   );
 }

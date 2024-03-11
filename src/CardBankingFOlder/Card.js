@@ -22,7 +22,7 @@ function CardSelect() {
 <br></br><br></br>
 <br></br><br></br>
 <br></br>
-        <Button onClick={()=>{navigate('/Home')}} >Back</Button>
+        {/* <Button onClick={()=>{navigate('/Home')}} >Back</Button> */}
       </div>
 
     </>

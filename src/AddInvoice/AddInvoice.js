@@ -17,7 +17,6 @@ export default function AddInvoice() {
   const [Tax, SetTax] = useState("");
   const [TaXID, SetTaXID] = useState("");
   const [VendorId, SetVendorId] = useState("");
-  const [date, SetDate] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     if(win.getItem("Id")!==null){
@@ -70,7 +69,7 @@ export default function AddInvoice() {
       <br />
       <br />
 
-      <Button
+      <Button className="Btn"
         type="primary"
         htmlType="submit"
         onClick={() => {
