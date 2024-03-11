@@ -12,10 +12,12 @@ export default function UPImethod() {
         <h4>Select Any one of these to continue Payment</h4>
         <br/>
       <ButtonGroup variant="contained" orientation="vertical" color="primary" className="ButtonGroup">
-        <Button >Gpay</Button>
-        <Button>phonepay</Button>
-        <Button>Paytm</Button>
-        <Button>Rupay</Button>
+        <Button>AfterPAy</Button>
+        <Button>AmazonPay</Button>
+        <Button>AmericanExpress</Button>
+        <Button>ApplePay</Button>
+        <Button>GooglePay</Button>
+        <Button>PayPal</Button>
       </ButtonGroup>
       <br/>
       <br/>
